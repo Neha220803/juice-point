@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "43042954248",
+    "project_id": "juice-point-4d411",
+    "storage_bucket": "juice-point-4d411.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43042954248:android:f18c44bc589719792b45bd",
+        "android_client_info": {
+          "package_name": "com.example.juice_point"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "43042954248-j0v1nun8dl9tlrdih22flu1uqm8p4m96.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdkZstgTkVui1nCPk13-omMD24gEVgqCQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "43042954248-j0v1nun8dl9tlrdih22flu1uqm8p4m96.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

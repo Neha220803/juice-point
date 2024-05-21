@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:juice_point/BottomNavBar/HistoryPage.dart';
 import 'package:juice_point/BottomNavBar/HomePage.dart';
 import 'package:juice_point/BottomNavBar/MenuPage.dart';
+import 'package:juice_point/BottomNavBar/NewOrderPage.dart';
 import 'package:juice_point/SideNavBar/SideNav.dart';
 
 class HomeNavPage extends StatefulWidget {
@@ -52,6 +53,7 @@ class _HomeNavPageState extends State<HomeNavPage> {
         children: <Widget>[
           HomePage(),
           MenuPage(),
+          NewOrderPage(),
           HistoryPage(),
         ],
         onPageChanged: (int index) {
@@ -64,7 +66,8 @@ class _HomeNavPageState extends State<HomeNavPage> {
         backgroundColor: Color(0xff75A47F),
         items: <TabItem>[
           TabItem(icon: Icons.home, title: 'Home'),
-          TabItem(icon: Icons.local_pizza, title: 'Menu'),
+          TabItem(icon: Icons.restaurant_menu_rounded, title: 'Menu'),
+          TabItem(icon: Icons.receipt_long_rounded, title: 'Order'),
           TabItem(icon: Icons.history, title: 'History'),
         ],
         onTap: (int index) {

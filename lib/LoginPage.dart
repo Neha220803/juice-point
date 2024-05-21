@@ -3,6 +3,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:juice_point/HomeNavPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+class Users {
+  final String displayName;
+  final String email;
+
+  Users({
+    required this.displayName,
+    required this.email,
+  });
+}
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -12,14 +24,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // Method to handle the login with Google
-  void _loginWithGoogle() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HomeNavPage()),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,8 +69,28 @@ class _LoginPageState extends State<LoginPage> {
                       fixedSize:
                           Size((MediaQuery.of(context).size.width) - 100, 45),
                     ),
-                    onPressed:
-                        _loginWithGoogle, // Call the login method when the button is pressed
+                    onPressed: () async {
+                      print(MediaQuery.of(context).size.width);
+                      showDialog(
+                        context: context,
+                        barrierDismissible:
+                            false, // Prevents user from dismissing the dialog
+                        builder: (BuildContext context) {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  const Color.fromARGB(255, 247, 243, 243)),
+                            ),
+                          );
+                        },
+                      );
+                      await signInWithGoogle();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeNavPage()),
+                      );
+                    },
+                    // Call the login method when the button is pressed
                     icon: Image.asset(
                       'assets/g.png',
                       height: 24.0, // Adjust the height as needed
@@ -80,5 +104,23 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
+  }
+
+  Future<Users> signInWithGoogle() async {
+    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+    UserCredential userCred =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+    print(userCred.user?.displayName);
+    String displayName = userCred.user?.displayName ?? "";
+    String email = userCred.user?.email ?? "";
+
+    Users users = Users(
+      displayName: displayName,
+      email: email,
+    );
+    return users;
   }
 }
