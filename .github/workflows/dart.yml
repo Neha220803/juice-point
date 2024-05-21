@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-ios:
-    name: Homies
+    name: Juice Point
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
