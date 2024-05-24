@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:juice_point/HomeNavPage.dart';
 import 'package:juice_point/LoginPage.dart';
 import 'package:juice_point/firebase_options.dart';
 
@@ -19,7 +20,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.green),
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: HomeNavPage(),
     );
   }
 }

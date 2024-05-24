@@ -328,6 +328,7 @@ class _BillPopUpState extends State<BillPopUp> {
   final CollectionReference _menu =
       FirebaseFirestore.instance.collection('menu');
   List<String> _selectedItems = [];
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -403,19 +404,6 @@ class _BillPopUpState extends State<BillPopUp> {
                       ),
                     ),
                     DataCell(Text(entry.value.toString())),
-                    // DataCell(FutureBuilder<int>(
-                    //   future: _calculateItemCost(entry.key),
-                    //   builder: (context, snapshot) {
-                    //     if (snapshot.connectionState ==
-                    //         ConnectionState.waiting) {
-                    //       return CircularProgressIndicator();
-                    //     } else if (snapshot.hasError) {
-                    //       return Text("Error");
-                    //     } else {
-                    //       return Text(snapshot.data.toString());
-                    //     }
-                    //   },
-                    // )),
                     DataCell(FutureBuilder<int>(
                       future: _calculateItemCost(entry.key),
                       builder: (context, snapshot) {
@@ -425,7 +413,6 @@ class _BillPopUpState extends State<BillPopUp> {
                         } else if (snapshot.hasError) {
                           return Text("Error");
                         } else {
-                          //Text('No*Cost ${snapshot.data.toString()}')
                           return Text(
                               textAlign: TextAlign.center,
                               '₹ ${widget.itemCounts[entry.key]! * snapshot.data!.toInt() ?? 0}\n(${entry.value.toString()}×${snapshot.data.toString()})');
@@ -499,53 +486,53 @@ class _BillPopUpState extends State<BillPopUp> {
                 foregroundColor: Colors.black,
                 fixedSize: const Size(340, 50),
               ),
-              onPressed: () async {
-                print("Submitting order...");
-                // if (_selectedItems.isEmpty) {
-                //   ScaffoldMessenger.of(context).showSnackBar(
-                //     SnackBar(
-                //       content: Text('No items selected'),
-                //     ),
-                //   );
-                // }
-                // else {
+              onPressed: _selectedItem2 == null || _isLoading
+                  ? null
+                  : () async {
+                      setState(() {
+                        _isLoading = true;
+                      });
+                      print("Submitting order...");
+                      var now = DateTime.now();
+                      await incOrderNo();
 
-                print("Submitting order...");
-                var now = DateTime.now();
-                await incOrderNo();
+                      // Create a list to store the items and their counts
+                      List<Map<String, dynamic>> itemsList = [];
+                      widget.itemCounts.forEach((itemName, itemCount) {
+                        itemsList.add({
+                          'name': itemName,
+                          'count': itemCount,
+                        });
+                      });
 
-                // Create a list to store the items and their counts
-                List<Map<String, dynamic>> itemsList = [];
-                widget.itemCounts.forEach((itemName, itemCount) {
-                  itemsList.add({
-                    'name': itemName,
-                    'count': itemCount,
-                  });
-                });
+                      // Add order details to the history collection
+                      await _history.add({
+                        'amount': totalAmount,
+                        'mode': _selectedItem2,
+                        'order_no': curNum,
+                        'time-stamp': now,
+                        'items':
+                            itemsList, // Add the list of items and their counts
+                      });
 
-                // Add order details to the history collection
-                await _history.add({
-                  'amount': totalAmount,
-                  'mode': _selectedItem2,
-                  'order_no': curNum,
-                  'time-stamp': now,
-                  'items': itemsList, // Add the list of items and their counts
-                });
-
-                // Close the dialog
-                if (mounted) {
-                  Navigator.pop(context);
-                }
-                print("Order submitted successfully.");
-              },
-              child: Text('Submit',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Open Sans',
-                    fontWeight: FontWeight.w600,
-                    height: 0,
-                  )),
+                      // Close the dialog
+                      if (mounted) {
+                        Navigator.pop(context);
+                      }
+                      print("Order submitted successfully.");
+                    },
+              child: _isLoading
+                  ? CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                    )
+                  : Text('Submit',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontFamily: 'Open Sans',
+                        fontWeight: FontWeight.w600,
+                        height: 0,
+                      )),
             ),
           ],
         ),

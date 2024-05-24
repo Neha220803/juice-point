@@ -53,51 +53,54 @@ class _LoginPageState extends State<LoginPage> {
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 240),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                    height: 200,
-                  ),
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      height: 200,
+                    ),
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.black,
+                        fixedSize:
+                            Size((MediaQuery.of(context).size.width) - 100, 45),
                       ),
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.black,
-                      fixedSize:
-                          Size((MediaQuery.of(context).size.width) - 100, 45),
+                      onPressed: () async {
+                        print(MediaQuery.of(context).size.width);
+                        showDialog(
+                          context: context,
+                          barrierDismissible:
+                              false, // Prevents user from dismissing the dialog
+                          builder: (BuildContext context) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    const Color.fromARGB(255, 247, 243, 243)),
+                              ),
+                            );
+                          },
+                        );
+                        await signInWithGoogle();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomeNavPage()),
+                        );
+                      },
+                      // Call the login method when the button is pressed
+                      icon: Image.asset(
+                        'assets/g.png',
+                        height: 24.0, // Adjust the height as needed
+                      ),
+                      label: Text(' Login with Google'),
                     ),
-                    onPressed: () async {
-                      print(MediaQuery.of(context).size.width);
-                      showDialog(
-                        context: context,
-                        barrierDismissible:
-                            false, // Prevents user from dismissing the dialog
-                        builder: (BuildContext context) {
-                          return Center(
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                  const Color.fromARGB(255, 247, 243, 243)),
-                            ),
-                          );
-                        },
-                      );
-                      await signInWithGoogle();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeNavPage()),
-                      );
-                    },
-                    // Call the login method when the button is pressed
-                    icon: Image.asset(
-                      'assets/g.png',
-                      height: 24.0, // Adjust the height as needed
-                    ),
-                    label: Text(' Login with Google'),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
