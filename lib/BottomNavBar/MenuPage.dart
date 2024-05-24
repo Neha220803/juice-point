@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -72,7 +74,6 @@ class _MenuPageState extends State<MenuPage> {
                     itemBuilder: (context, index) {
                       var category = groupedMenu.keys.toList()[index];
                       var categoryItems = groupedMenu[category]!;
-
                       return Card(
                         elevation: 4,
                         // color: Colors.pink,
@@ -92,7 +93,10 @@ class _MenuPageState extends State<MenuPage> {
                                   child: Card(
                                     child: ListTile(
                                       leading: CircleAvatar(
-                                        radius: 20,
+                                        radius: 30,
+                                        backgroundImage: NetworkImage(
+                                            "https://firebasestorage.googleapis.com/v0/b/juice-point-4d411.appspot.com/o/avacado.png?alt=media&token=8146eb62-4cbc-4cd4-9320-1655ebe778de"),
+                                        backgroundColor: Colors.white,
                                       ),
                                       title: Text(data['name']),
                                       trailing:

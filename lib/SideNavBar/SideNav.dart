@@ -38,38 +38,40 @@ class _SideNavBarState extends State<SideNavBar> {
             width: double.infinity,
             color: Color(0xff75A47F),
             child: DrawerHeader(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _user!.photoURL != null
-                      ? CircleAvatar(
-                          radius: 45, // Adjust the percentage as needed
-                          backgroundImage: NetworkImage(_user!.photoURL!),
-                        )
-                      : CircleAvatar(
-                          radius: 45, // Adjust the percentage as needed
-                          backgroundColor: Colors
-                              .black, // You can set your desired background color
-                          child: Text(
-                            _user!.displayName![0],
-                            style: TextStyle(
-                              // Adjust the percentage as needed
-                              color: Colors.white,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _user!.photoURL != null
+                        ? CircleAvatar(
+                            radius: 40, // Adjust the percentage as needed
+                            backgroundImage: NetworkImage(_user!.photoURL!),
+                          )
+                        : CircleAvatar(
+                            radius: 40, // Adjust the percentage as needed
+                            backgroundColor: Colors
+                                .black, // You can set your desired background color
+                            child: Text(
+                              _user!.displayName![0],
+                              style: TextStyle(
+                                // Adjust the percentage as needed
+                                color: Colors.white,
+                              ),
                             ),
                           ),
-                        ),
-                  // Adjust the percentage as needed
-                  SizedBox(height: 20,),
-                  Text(
-                    "${_user?.displayName ?? 'No Name'}",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      // Adjust the percentage as needed
+                    // Adjust the percentage as neede
+                    Text(
+                      "${_user?.displayName ?? 'No Name'}",
+                      style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.width / 17,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        // Adjust the percentage as needed
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -85,7 +87,7 @@ class _SideNavBarState extends State<SideNavBar> {
             leading: Icon(Icons.notifications),
             title: Text('Stock Requests'),
             onTap: () {
-              // print(MediaQuery.of(context).size.width);
+              print(MediaQuery.of(context).size.width);
               // Navigator.push(
               //   context,
               //   MaterialPageRoute(builder: (context) => NotifyPage()),

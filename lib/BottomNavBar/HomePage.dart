@@ -15,9 +15,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final CollectionReference _menu =
       FirebaseFirestore.instance.collection('menu');
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _messageController = TextEditingController();
-  TextEditingController _messageController2 = TextEditingController();
+  // TextEditingController _titleController = TextEditingController();
+  // TextEditingController _messageController = TextEditingController();
+  // TextEditingController _messageController2 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +41,10 @@ class _HomePageState extends State<HomePage> {
               ),
               Text(
                 "Pouring Happiness, one glass at a time",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color(0xFFFFE8E8),
-                  fontSize: 16,
+                  fontSize: MediaQuery.of(context).size.width / 22,
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.w700,
                   // height: 0.13,
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                             style: GoogleFonts.pacifico(
                               textStyle: TextStyle(
                                 color: Color(0xFF75A47F),
-                                fontSize: 82.92,
+                                fontSize: MediaQuery.of(context).size.width / 5,
                                 fontFamily: 'Pacifico',
                                 fontWeight: FontWeight.w400,
                                 height: 0,
@@ -78,16 +79,17 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Positioned(
-                      left: 103.57,
-                      top: 70.34,
+                      left: MediaQuery.of(context).size.width / 4,
+                      top: MediaQuery.of(context).size.width / 5.8,
                       child: SizedBox(
-                        width: 114.26,
-                        height: 69.53,
+                        // width: 114.26,
+                        // height: 69.53,
                         child: Text('Point',
                             style: GoogleFonts.pacifico(
                               textStyle: TextStyle(
                                 color: Color(0xFF75A47F),
-                                fontSize: 41.17,
+                                fontSize:
+                                    MediaQuery.of(context).size.width / 10,
                                 fontFamily: 'Pacifico',
                                 fontWeight: FontWeight.w400,
                                 height: 0,
@@ -96,16 +98,17 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Positioned(
-                      left: 65,
-                      top: 13.73,
+                      left: MediaQuery.of(context).size.width / 6.99,
+                      top: MediaQuery.of(context).size.width / 30,
                       child: SizedBox(
-                        width: 93.27,
-                        height: 90.78,
+                        // width: 93.27,
+                        // height: 90.78,
                         child: Text('uice',
                             style: GoogleFonts.pacifico(
                               textStyle: TextStyle(
                                 color: Color(0xFF75A47F),
-                                fontSize: 53.61,
+                                fontSize:
+                                    MediaQuery.of(context).size.width / 7.7,
                                 fontFamily: 'Pacifico',
                                 fontWeight: FontWeight.w400,
                                 height: 0,
@@ -123,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFFF0E3E3),
-                    fontSize: 16,
+                    fontSize: MediaQuery.of(context).size.width / 23.5,
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.w600,
                     // height: 0.08,

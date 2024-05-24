@@ -54,7 +54,7 @@ class _HomeNavPageState extends State<HomeNavPage> {
           HomePage(),
           MenuPage(),
           NewOrderPage(),
-          HistoryPage(),
+          OrderHistoryPage(),
         ],
         onPageChanged: (int index) {
           setState(() {
