@@ -1,10 +1,7 @@
-// ignore_for_file: prefer_const_constructors, prefer_for_elements_to_map_fromiterable, prefer_const_literals_to_create_immutables, avoid_print, prefer_interpolation_to_compose_strings
+// ignore_for_file: prefer_const_constructors, prefer_for_elements_to_map_fromiterable, prefer_const_literals_to_create_immutables, avoid_print, prefer_interpolation_to_compose_strings, avoid_unnecessary_containers
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NewOrderPage extends StatefulWidget {
   const NewOrderPage({Key? key});
@@ -184,7 +181,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
   }
 }
 
-class SelectedItemsList extends StatelessWidget {
+class SelectedItemsList extends StatefulWidget {
   final Map<String, int> itemCounts;
   final Function(String) onItemIncrement;
   final Function(String) onItemDecrement;
@@ -199,44 +196,70 @@ class SelectedItemsList extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _SelectedItemsListState createState() => _SelectedItemsListState();
+}
+
+class _SelectedItemsListState extends State<SelectedItemsList> {
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: 1,
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: ListView(
-            children: itemCounts.entries
-                .where((entry) => entry.value >= 1)
-                .map((entry) {
-              return ListTile(
-                title: Text(entry.key),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      onPressed: () => onItemDecrement(entry.key),
-                      icon: Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                      ),
+      child: Container(
+        width: double.infinity,
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              physics: AlwaysScrollableScrollPhysics(),
+              child: Column(
+                children: widget.itemCounts.entries
+                    .where((entry) => entry.value >= 1)
+                    .map((entry) {
+                  return ListTile(
+                    title: Text(entry.key),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () => widget.onItemDecrement(entry.key),
+                          icon: Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
+                        ),
+                        Text(entry.value.toString()),
+                        IconButton(
+                          onPressed: () => widget.onItemIncrement(entry.key),
+                          icon: Icon(
+                            Icons.add,
+                            color: Colors.green,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(entry.value.toString()),
-                    IconButton(
-                      onPressed: () => onItemIncrement(entry.key),
-                      icon: Icon(
-                        Icons.add,
-                        color: Colors.green,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
+                  );
+                }).toList(),
+              ),
+            ),
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }
 
@@ -395,7 +418,8 @@ class _BillPopUpState extends State<BillPopUp> {
                   cells: [
                     DataCell(
                       Container(
-                        // width: 80, // Adjust width as needed
+                        // color: Colors.amber,
+                        width: 80, // Adjust width as needed
                         child: Text(
                           entry.key,
                           textAlign: TextAlign.center,

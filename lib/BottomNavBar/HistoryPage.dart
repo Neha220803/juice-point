@@ -265,7 +265,7 @@ class _OrderDetailsDialogState extends State<OrderDetailsDialog> {
                     ]),
                     DataRow(cells: [
                       DataCell(Text('Mode')),
-                      DataCell(Text(data['mode'])),
+                      DataCell(Text(data['mode'].toString())),
                     ]),
                     DataRow(cells: [
                       DataCell(Text('Time')),
