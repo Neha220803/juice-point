@@ -128,8 +128,16 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
                                           color: Colors.black), // Text color
                                     ),
                                   ),
-                                  title: Text("Order No. " +
-                                      order['order_no'].toString()),
+                                  title: Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Text(
+                                      "Order No. " +
+                                          order['order_no'].toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
+                                    ),
+                                  ),
                                   trailing:
                                       Text("₹" + order['amount'].toString()),
                                   subtitle: Column(
@@ -224,7 +232,26 @@ class _OrderDetailsDialogState extends State<OrderDetailsDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Order Details"),
+      title: Column(
+        children: [
+          Text(
+            "Order Details",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Color(0xff75A47F),
+              fontSize: 24,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Divider(
+            color: Color(0xff75A47F),
+          )
+        ],
+      ),
       content: SizedBox(
         width: double.maxFinite,
         child: FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(

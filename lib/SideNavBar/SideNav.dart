@@ -99,7 +99,7 @@ class _SideNavBarState extends State<SideNavBar> {
             leading: Icon(Icons.arrow_back),
             title: Text("Log Out"),
             onTap: () async {
-              await GoogleSignIn().signOut();
+              // await GoogleSignIn().signOut();
               FirebaseAuth.instance.signOut();
               Navigator.of(context).popUntil((route) => route.isFirst);
               Navigator.pushReplacement(

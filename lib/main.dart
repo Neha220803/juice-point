@@ -20,7 +20,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.green),
       debugShowCheckedModeBanner: false,
-      home: HomeNavPage(),
+      home: LoginPage(),
     );
   }
 }

@@ -43,6 +43,7 @@ class _HomeNavPageState extends State<HomeNavPage> {
           "Juice Point",
           style: GoogleFonts.pacifico(
             color: Colors.white,
+            textStyle: TextStyle(fontSize: 20),
           ),
         ),
         backgroundColor: Color(0xff75A47F),

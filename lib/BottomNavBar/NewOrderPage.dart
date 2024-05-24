@@ -396,12 +396,23 @@ class _BillPopUpState extends State<BillPopUp> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Order Details"),
+      title: Text(
+        "Order Details",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Color(0xff75A47F),
+          fontSize: 24,
+          fontFamily: 'Roboto',
+          fontWeight: FontWeight.w900,
+        ),
+      ),
       content: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Divider(),
+            Divider(
+              color: Color(0xff75A47F),
+            ),
             DataTable(
               columns: [
                 DataColumn(
@@ -500,7 +511,6 @@ class _BillPopUpState extends State<BillPopUp> {
               ),
             ),
             SizedBox(height: 10),
-
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
