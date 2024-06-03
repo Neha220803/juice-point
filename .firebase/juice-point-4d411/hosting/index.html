@@ -35,10 +35,30 @@
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = "2491247867";
+    const serviceWorkerVersion = "3064633933";
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
+
+  <!-- Firebase JS SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script>
+    import { initializeApp } from "firebase/app";
+    import { getAnalytics } from "firebase/analytics";
+    // TODO: Replace the following with your app's Firebase project configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyC9TmteQHhvPdUd6WvymxaP96E6MCCH3OY",
+      authDomain: "juice-point-4d411.firebaseapp.com",
+      projectId: "juice-point-4d411",
+      storageBucket: "juice-point-4d411.appspot.com",
+      messagingSenderId: "43042954248",
+      appId: "1:43042954248:web:0ed36cbbc0fc8d202b45bd"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
 </head>
 
 <body>
