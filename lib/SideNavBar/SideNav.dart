@@ -43,26 +43,13 @@ class _SideNavBarState extends State<SideNavBar> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _user!.photoURL != null
-                        ? CircleAvatar(
-                            radius: 40, // Adjust the percentage as needed
-                            backgroundImage: NetworkImage(_user!.photoURL!),
-                          )
-                        : CircleAvatar(
-                            radius: 40, // Adjust the percentage as needed
-                            backgroundColor: Colors
-                                .black, // You can set your desired background color
-                            child: Text(
-                              _user!.displayName![0],
-                              style: TextStyle(
-                                // Adjust the percentage as needed
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
+                    CircleAvatar(
+                      radius: 40,
+                      backgroundImage: AssetImage("assets/logo.png"),
+                    ),
                     // Adjust the percentage as neede
                     Text(
-                      "${_user?.displayName ?? 'No Name'}",
+                      "Juice Point",
                       style: TextStyle(
                         fontSize: MediaQuery.of(context).size.width / 17,
                         fontWeight: FontWeight.w500,
