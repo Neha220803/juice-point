@@ -2,7 +2,6 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:juice_point/HomeNavPage.dart';
 import 'package:juice_point/LoginPage.dart';
 import 'package:juice_point/firebase_options.dart';
 

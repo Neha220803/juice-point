@@ -1,9 +1,10 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: use_build_context_synchronously, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:juice_point/HomeNavPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:juice_point/utils/responsive.dart';
 
 class Users {
   final String displayName;
@@ -16,7 +17,7 @@ class Users {
 }
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -34,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/login-bg.png'),
                 fit: BoxFit.cover,
@@ -46,45 +47,65 @@ class _LoginPageState extends State<LoginPage> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Form(
-                  key: _formKey, // Assigning GlobalKey to Form
+                  key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Column(
                         children: [
-                          TextFormField(
-                            controller: _emailController,
-                            decoration: InputDecoration(
-                              labelText: 'Enter Email ID',
-                              border: OutlineInputBorder(),
-                              filled: true,
-                              fillColor: Colors.white.withOpacity(0.5),
+                          if (!responsive.isMobile(context))
+                            Text('Juice Point',
+                                style: GoogleFonts.pacifico(
+                                  textStyle: const TextStyle(
+                                    color: Color.fromARGB(255, 221, 221, 221),
+                                    fontSize: 70,
+                                    fontFamily: 'Pacifico',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )),
+                          SizedBox(
+                            width: !responsive.isMobile(context)
+                                ? 400
+                                : double.infinity,
+                            child: TextFormField(
+                              controller: _emailController,
+                              decoration: InputDecoration(
+                                labelText: 'Enter Email ID',
+                                border: const OutlineInputBorder(),
+                                filled: true,
+                                fillColor: Colors.white.withOpacity(0.5),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter your email';
+                                }
+                                return null;
+                              },
                             ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter your email';
-                              }
-                              return null;
-                            },
                           ),
-                          SizedBox(height: 20),
-                          TextFormField(
-                            controller: _passwordController,
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              labelText: 'Enter Password',
-                              border: OutlineInputBorder(),
-                              filled: true,
-                              fillColor: Colors.white.withOpacity(0.5),
+                          const SizedBox(height: 20),
+                          SizedBox(
+                            width: !responsive.isMobile(context)
+                                ? 400
+                                : double.infinity,
+                            child: TextFormField(
+                              controller: _passwordController,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                labelText: 'Enter Password',
+                                border: const OutlineInputBorder(),
+                                filled: true,
+                                fillColor: Colors.white.withOpacity(0.5),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter your password';
+                                }
+                                return null;
+                              },
                             ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter your password';
-                              }
-                              return null;
-                            },
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -93,7 +114,10 @@ class _LoginPageState extends State<LoginPage> {
                               backgroundColor: Colors.white.withOpacity(0.7),
                               foregroundColor: Colors.black,
                               fixedSize: Size(
-                                  (MediaQuery.of(context).size.width) - 100,
+                                  (!responsive.isMobile(context)
+                                          ? 400
+                                          : MediaQuery.of(context).size.width) -
+                                      100,
                                   45),
                             ),
                             onPressed: () async {
@@ -103,12 +127,11 @@ class _LoginPageState extends State<LoginPage> {
                                   context: context,
                                   barrierDismissible: false,
                                   builder: (BuildContext context) {
-                                    return Center(
+                                    return const Center(
                                       child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                                const Color.fromARGB(
-                                                    255, 247, 243, 243)),
+                                        valueColor: AlwaysStoppedAnimation<
+                                                Color>(
+                                            Color.fromARGB(255, 247, 243, 243)),
                                       ),
                                     );
                                   },
@@ -121,12 +144,13 @@ class _LoginPageState extends State<LoginPage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => HomeNavPage()),
+                                        builder: (context) =>
+                                            const HomeNavPage()),
                                   );
                                 } else {
                                   // Show error message
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
+                                    const SnackBar(
                                       content: Text('Wrong Email or Password'),
                                       backgroundColor: Colors.red,
                                     ),
@@ -134,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                                 }
                               }
                             },
-                            child: Text(' Login with Email'),
+                            child: const Text('Login'),
                           ),
                         ],
                       ),

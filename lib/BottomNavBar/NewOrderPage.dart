@@ -1,10 +1,10 @@
-// ignore_for_file: prefer_const_constructors, prefer_for_elements_to_map_fromiterable, prefer_const_literals_to_create_immutables, avoid_print, prefer_interpolation_to_compose_strings, avoid_unnecessary_containers
+// ignore_for_file: prefer_for_elements_to_map_fromiterable, prefer_const_literals_to_create_immutables, avoid_print, prefer_interpolation_to_compose_strings, avoid_unnecessary_containers
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class NewOrderPage extends StatefulWidget {
-  const NewOrderPage({Key? key});
+  const NewOrderPage({super.key});
 
   @override
   State<NewOrderPage> createState() => _NewOrderPageState();
@@ -25,12 +25,12 @@ class _NewOrderPageState extends State<NewOrderPage> {
             return Text('Error: ${snapshot.error}');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Center(child: Text('No data available'));
+            return const Center(child: Text('No data available'));
           }
-          var documents = snapshot.data!.docs;
+          //var documents = snapshot.data!.docs;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
@@ -41,7 +41,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "New Order",
                         style: TextStyle(
                           color: Colors.black,
@@ -56,7 +56,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(13),
                           ),
-                          backgroundColor: Color(0xffF5DAD2),
+                          backgroundColor: const Color(0xffF5DAD2),
                           foregroundColor: Colors.black,
                           fixedSize: const Size(120, 50),
                         ),
@@ -64,7 +64,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
                           if (itemCounts.isEmpty) {
                             // Show a snack bar if no items are selected
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                 content:
                                     Text('Please selecte atleast one item'),
                                 backgroundColor: Colors.red,
@@ -80,14 +80,14 @@ class _NewOrderPageState extends State<NewOrderPage> {
                             );
                           }
                         },
-                        child: Text("View Bill"),
+                        child: const Text("View Bill"),
                       ),
                     ],
                   ),
                 ),
-                Divider(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                const Divider(),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
                   child: Text("Selected Items:"),
                 ),
                 SelectedItemsList(
@@ -116,9 +116,9 @@ class _NewOrderPageState extends State<NewOrderPage> {
                     });
                   },
                 ),
-                Divider(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                const Divider(),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
                   child: Text("Menu Items"),
                 ),
                 Expanded(
@@ -130,10 +130,10 @@ class _NewOrderPageState extends State<NewOrderPage> {
                         return Text('Error: ${snapshot.error}');
                       }
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
                       if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                        return Center(child: Text('No data available'));
+                        return const Center(child: Text('No data available'));
                       }
                       var documents = snapshot.data!.docs;
                       // Group documents by category
@@ -188,14 +188,15 @@ class SelectedItemsList extends StatefulWidget {
   final Function(String) onItemRemove;
 
   const SelectedItemsList({
-    Key? key,
+    super.key,
     required this.itemCounts,
     required this.onItemIncrement,
     required this.onItemDecrement,
     required this.onItemRemove,
-  }) : super(key: key);
+  });
 
   @override
+  // ignore: library_private_types_in_public_api
   _SelectedItemsListState createState() => _SelectedItemsListState();
 }
 
@@ -212,14 +213,14 @@ class _SelectedItemsListState extends State<SelectedItemsList> {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 1,
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: Card(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: SingleChildScrollView(
               controller: _scrollController,
-              physics: AlwaysScrollableScrollPhysics(),
+              physics: const AlwaysScrollableScrollPhysics(),
               child: Column(
                 children: widget.itemCounts.entries
                     .where((entry) => entry.value >= 1)
@@ -231,7 +232,7 @@ class _SelectedItemsListState extends State<SelectedItemsList> {
                       children: [
                         IconButton(
                           onPressed: () => widget.onItemDecrement(entry.key),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.delete,
                             color: Colors.red,
                           ),
@@ -239,7 +240,7 @@ class _SelectedItemsListState extends State<SelectedItemsList> {
                         Text(entry.value.toString()),
                         IconButton(
                           onPressed: () => widget.onItemIncrement(entry.key),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.add,
                             color: Colors.green,
                           ),
@@ -269,11 +270,11 @@ class MenuItemCard extends StatelessWidget {
   final Function() onAdd;
 
   const MenuItemCard({
-    Key? key,
+    super.key,
     required this.itemName,
     required this.itemCost,
     required this.onAdd,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -285,7 +286,7 @@ class MenuItemCard extends StatelessWidget {
           subtitle: Text("₹${itemCost.toStringAsFixed(2)}"),
           trailing: IconButton(
             onPressed: onAdd,
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             color: Colors.green,
           ),
         ),
@@ -300,11 +301,11 @@ class MenuCategoryExpansionTile extends StatelessWidget {
   final Function(String) onItemAdd;
 
   const MenuCategoryExpansionTile({
-    Key? key,
+    super.key,
     required this.category,
     required this.categoryItems,
     required this.onItemAdd,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -315,7 +316,7 @@ class MenuCategoryExpansionTile extends StatelessWidget {
         children: [
           ListView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: categoryItems.length,
             itemBuilder: (context, index) {
               var data = categoryItems[index].data() as Map<String, dynamic>;
@@ -323,7 +324,7 @@ class MenuCategoryExpansionTile extends StatelessWidget {
               var itemCost = data['cost'] as int;
               return MenuItemCard(
                 itemName: itemName,
-                itemCost: itemCost as int,
+                itemCost: itemCost,
                 onAdd: () => onItemAdd(itemName),
               );
             },
@@ -336,7 +337,7 @@ class MenuCategoryExpansionTile extends StatelessWidget {
 
 class BillPopUp extends StatefulWidget {
   final Map<String, int> itemCounts;
-  const BillPopUp({Key? key, required this.itemCounts}) : super(key: key);
+  const BillPopUp({super.key, required this.itemCounts});
 
   @override
   State<BillPopUp> createState() => _BillPopUpState();
@@ -350,7 +351,7 @@ class _BillPopUpState extends State<BillPopUp> {
   int totalAmount = 0;
   final CollectionReference _menu =
       FirebaseFirestore.instance.collection('menu');
-  List<String> _selectedItems = [];
+  //List<String> _selectedItems = [];
   bool _isLoading = false;
 
   @override
@@ -396,7 +397,7 @@ class _BillPopUpState extends State<BillPopUp> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(
+      title: const Text(
         "Order Details",
         textAlign: TextAlign.center,
         style: TextStyle(
@@ -410,19 +411,19 @@ class _BillPopUpState extends State<BillPopUp> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Divider(
+            const Divider(
               color: Color(0xff75A47F),
             ),
             DataTable(
               columns: [
-                DataColumn(
+                const DataColumn(
                   label: Text("Item"),
                 ),
-                DataColumn(
+                const DataColumn(
                     label: Text(
                   "No.",
                 )),
-                DataColumn(label: Text("Cost")),
+                const DataColumn(label: Text("Cost")),
               ],
               rows: widget.itemCounts.entries.map((entry) {
                 return DataRow(
@@ -444,9 +445,9 @@ class _BillPopUpState extends State<BillPopUp> {
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return CircularProgressIndicator();
+                          return const CircularProgressIndicator();
                         } else if (snapshot.hasError) {
-                          return Text("Error");
+                          return const Text("Error");
                         } else {
                           return Text(
                               textAlign: TextAlign.center,
@@ -458,16 +459,16 @@ class _BillPopUpState extends State<BillPopUp> {
                 );
               }).toList(),
             ),
-            Divider(),
+            const Divider(),
             Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(color: Color(0xff75A47F), width: 2.5),
+                border: Border.all(color: const Color(0xff75A47F), width: 2.5),
                 // Example border color
               ),
               child: DropdownButton<String>(
-                hint: Text('Select a Payment Method'),
+                hint: const Text('Select a Payment Method'),
                 value: _selectedItem2,
                 onChanged: (String? newValue) async {
                   print("Selected payment method: $newValue");
@@ -487,8 +488,8 @@ class _BillPopUpState extends State<BillPopUp> {
                 underline: Container(),
               ),
             ),
-            Divider(),
-            Text(
+            const Divider(),
+            const Text(
               "Order Summary",
               style: TextStyle(
                 fontSize: 20, // Adjust font size as needed
@@ -498,25 +499,25 @@ class _BillPopUpState extends State<BillPopUp> {
             ),
             Text(
               "Total Items: ${widget.itemCounts.values.reduce((sum, element) => sum + element)}",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16, // Adjust font size as needed
                 color: Colors.black87, // Set text color
               ),
             ),
             Text(
               "Total Amount to Pay: $totalAmount",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16, // Adjust font size as needed
                 color: Colors.black87, // Set text color
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(13),
                 ),
-                backgroundColor: Color(0xffF5DAD2),
+                backgroundColor: const Color(0xffF5DAD2),
                 foregroundColor: Colors.black,
                 fixedSize: const Size(340, 50),
               ),
@@ -556,10 +557,10 @@ class _BillPopUpState extends State<BillPopUp> {
                       print("Order submitted successfully.");
                     },
               child: _isLoading
-                  ? CircularProgressIndicator(
+                  ? const CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
                     )
-                  : Text('Submit',
+                  : const Text('Submit',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,

@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:juice_point/LoginPage.dart';
+import 'package:juice_point/utils/responsive.dart';
 
 class SideNavBar extends StatefulWidget {
   const SideNavBar({super.key});
@@ -13,21 +13,6 @@ class SideNavBar extends StatefulWidget {
 }
 
 class _SideNavBarState extends State<SideNavBar> {
-  late User? _user;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchUser();
-  }
-
-  Future<void> _fetchUser() async {
-    final currentUser = FirebaseAuth.instance.currentUser;
-    setState(() {
-      _user = currentUser;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -51,7 +36,9 @@ class _SideNavBarState extends State<SideNavBar> {
                     Text(
                       "Juice Point",
                       style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width / 17,
+                        fontSize: !responsive.isMobile(context)
+                            ? 25
+                            : MediaQuery.of(context).size.width / 17,
                         fontWeight: FontWeight.w500,
                         color: Colors.white,
                         // Adjust the percentage as needed
