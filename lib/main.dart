@@ -2,8 +2,9 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:juice_point/LoginPage.dart';
+import 'package:juice_point/Pages/login_page.dart';
 import 'package:juice_point/firebase_options.dart';
+import 'package:juice_point/utils/constants.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +20,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.green),
+      theme: ThemeData(primarySwatch: green),
       debugShowCheckedModeBanner: false,
       home: LoginPage(),
       // routes: 
