@@ -105,7 +105,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
                       // Delete the item if count becomes zero
                       if (itemCounts[itemName] == 0) {
                         itemCounts.remove(itemName);
-                        print("List after Deleted: $itemCounts");
+                        // print("List after Deleted: $itemCounts");
                       }
                     });
                   },

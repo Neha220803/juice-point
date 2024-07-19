@@ -120,7 +120,7 @@ class _BillPopUpState extends State<BillPopUp> {
                 hint: const Text('Select a Payment Method'),
                 value: _selectedItem2,
                 onChanged: (String? newValue) async {
-                  print("Selected payment method: $newValue");
+                  // print("Selected payment method: $newValue");
                   int neww = await _updateTotalAmount();
                   setState(() {
                     _selectedItem2 = newValue;
@@ -167,7 +167,7 @@ class _BillPopUpState extends State<BillPopUp> {
                       setState(() {
                         _isLoading = true;
                       });
-                      print("Submitting order...");
+                      // print("Submitting order...");
                       var now = DateTime.now();
                       await incOrderNo();
 
@@ -193,7 +193,7 @@ class _BillPopUpState extends State<BillPopUp> {
                       if (mounted) {
                         Navigator.pop(context);
                       }
-                      print("Order submitted successfully.");
+                      // print("Order submitted successfully.");
                     },
               // child: _isLoading
               //     ? const CircularProgressIndicator(

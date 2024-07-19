@@ -20,7 +20,7 @@ Future<Users?> signInWithEmailAndPassword(
     );
     return users;
   } catch (e) {
-    print('Error in sing in: $e');
+    // print('Error in sing in: $e');
     return null;
   }
 }
