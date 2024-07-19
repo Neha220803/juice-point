@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:juice_point/Components/custom_font_text.dart';
+import 'package:juice_point/Components/custom_text.dart';
 import 'package:juice_point/utils/constants.dart';
 import 'package:juice_point/utils/responsive.dart';
 
@@ -30,18 +32,15 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  "Pouring Happiness, one glass at a time",
+                CustomText(
+                  value: "Pouring Happiness, one glass at a time",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: secondaryColor,
-                    fontSize: !responsive.isMobile(context)
-                        ? 32
-                        : MediaQuery.of(context).size.width / 22,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1.81,
-                  ),
+                  color: secondaryColor,
+                  size: !responsive.isMobile(context)
+                      ? 32
+                      : MediaQuery.of(context).size.width / 22,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w700,
                 ),
 
                 // Conditionally render text based on device type
@@ -55,35 +54,23 @@ class _HomePageState extends State<HomePage> {
                           left: 0,
                           top: 0,
                           child: SizedBox(
-                            child: Text('J',
-                                style: GoogleFonts.pacifico(
-                                  textStyle: TextStyle(
-                                    color: primaryColor,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width / 5,
-                                    fontFamily: 'Pacifico',
-                                    fontWeight: FontWeight.w400,
-                                    height: 0,
-                                  ),
-                                )),
-                          ),
+                              child: CustomFontText(
+                            value: "J",
+                            size: MediaQuery.of(context).size.width / 5,
+                            color: primaryColor,
+                            fontWeight: FontWeight.w400,
+                          )),
                         ),
                         Positioned(
                           left: MediaQuery.of(context).size.width / 4,
                           top: MediaQuery.of(context).size.width / 5.8,
                           child: SizedBox(
-                            child: Text('Point',
-                                style: GoogleFonts.pacifico(
-                                  textStyle: TextStyle(
-                                    color: primaryColor,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width / 10,
-                                    fontFamily: 'Pacifico',
-                                    fontWeight: FontWeight.w400,
-                                    height: 0,
-                                  ),
-                                )),
-                          ),
+                              child: CustomFontText(
+                            value: "Point",
+                            size: MediaQuery.of(context).size.width / 10,
+                            color: primaryColor,
+                            fontWeight: FontWeight.w400,
+                          )),
                         ),
                         Positioned(
                           left: MediaQuery.of(context).size.width / 6.99,
@@ -106,29 +93,25 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 if (!responsive.isMobile(context))
-                  Text('Juice Point',
-                      style: GoogleFonts.pacifico(
-                        textStyle: const TextStyle(
-                          color: primaryColor,
-                          fontSize: 80,
-                          fontFamily: 'Pacifico',
-                          fontWeight: FontWeight.w400,
-                        ),
-                      )),
+                  const CustomFontText(
+                    value: "Juice Point",
+                    size: 80,
+                    color: primaryColor,
+                    fontWeight: FontWeight.w400,
+                  ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(50, 25, 50, 0),
-                  child: Text(
-                    "Welcome to Juice Point, a happy place where refreshing flavors and healthy vibes come together! Enjoy our vibrant, delicious juices made with love and the freshest ingredients.",
+                  child: CustomText(
+                    value:
+                        "Welcome to Juice Point, a happy place where refreshing flavors and healthy vibes come together! Enjoy our vibrant, delicious juices made with love and the freshest ingredients.",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: secondaryColor,
-                      fontSize: !responsive.isMobile(context)
-                          ? 30
-                          : MediaQuery.of(context).size.width / 23.5,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1.81,
-                    ),
+                    size: !responsive.isMobile(context)
+                        ? 30
+                        : MediaQuery.of(context).size.width / 23.5,
+                    color: secondaryColor,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1.81,
                   ),
                 ),
               ],

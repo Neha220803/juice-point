@@ -1,7 +1,7 @@
-// ignore_for_file: use_build_context_synchronously, avoid_print
+// ignore_for_file:  avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:juice_point/Components/custom_font_text.dart';
 import 'package:juice_point/Functions/signin_emai_password.dart';
 import 'package:juice_point/Models/user_model.dart';
 import 'package:juice_point/Pages/home_nav_page.dart';
@@ -45,15 +45,11 @@ class _LoginPageState extends State<LoginPage> {
                       Column(
                         children: [
                           if (!responsive.isMobile(context))
-                            Text('Juice Point',
-                                style: GoogleFonts.pacifico(
-                                  textStyle: const TextStyle(
-                                    color: Color.fromARGB(255, 221, 221, 221),
-                                    fontSize: 70,
-                                    fontFamily: 'Pacifico',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                )),
+                            const CustomFontText(
+                                value: "Juice Point",
+                                color: Color.fromARGB(255, 221, 221, 221),
+                                size: 70,
+                                fontWeight: FontWeight.w400),
                           SizedBox(
                             width: !responsive.isMobile(context)
                                 ? 400
@@ -103,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                                 borderRadius: BorderRadius.circular(25),
                               ),
                               backgroundColor: white.withOpacity(0.7),
-                              foregroundColor:black,
+                              foregroundColor: black,
                               fixedSize: Size(
                                   (!responsive.isMobile(context)
                                           ? 400
@@ -130,8 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                                 Users? user = await signInWithEmailAndPassword(
                                     _emailController.text.trim(),
                                     _passwordController.text.trim());
-                                Navigator.pop(
-                                    context); 
+                                Navigator.pop(context);
                                 if (user != null) {
                                   Navigator.push(
                                     context,

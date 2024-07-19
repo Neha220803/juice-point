@@ -2,8 +2,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:juice_point/Components/new_order/bill_pop_up.dart';
-import 'package:juice_point/Components/new_order/menu_category_tile.dart';
+import 'package:juice_point/Components/custom_text.dart';
+import 'package:juice_point/Components/new_order_page_components/bill_pop_up.dart';
+import 'package:juice_point/Components/new_order_page_components/menu_category_tile.dart';
+import 'package:juice_point/Components/new_order_page_components/select_items_list.dart';
 import 'package:juice_point/utils/constants.dart';
 
 class NewOrderPage extends StatefulWidget {
@@ -44,15 +46,12 @@ class _NewOrderPageState extends State<NewOrderPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        "New Order",
-                        style: TextStyle(
-                          color: black,
-                          fontSize: 26,
-                          fontFamily: 'Roboto Slab',
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 1.81,
-                        ),
+                      const CustomText(
+                        value: "New Order",
+                        size: 26,
+                        fontFamily: 'Roboto Slab',
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 1.81,
                       ),
                       const SizedBox(),
                       ElevatedButton(
@@ -84,7 +83,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
                             );
                           }
                         },
-                        child: const Text("View Bill"),
+                        child: const CustomText(value: "View Bill"),
                       ),
                     ],
                   ),
@@ -92,9 +91,10 @@ class _NewOrderPageState extends State<NewOrderPage> {
                 const Divider(),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8),
-                  child: Text("Selected Items:"),
+                  child: CustomText(value: "Selected Items:"),
                 ),
                 SelectedItemsList(
+                  context: context,
                   itemCounts: itemCounts,
                   onItemIncrement: (itemName) {
                     setState(() {
@@ -115,7 +115,6 @@ class _NewOrderPageState extends State<NewOrderPage> {
                   },
                   onItemRemove: (itemName) {
                     setState(() {
-                      // Remove item from the selected items list
                       itemCounts.remove(itemName);
                     });
                   },
@@ -123,7 +122,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
                 const Divider(),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8),
-                  child: Text("Menu Items"),
+                  child: CustomText(value: "Menu Items"),
                 ),
                 Expanded(
                   flex: 3,
@@ -183,87 +182,5 @@ class _NewOrderPageState extends State<NewOrderPage> {
         },
       ),
     );
-  }
-}
-
-class SelectedItemsList extends StatefulWidget {
-  final Map<String, int> itemCounts;
-  final Function(String) onItemIncrement;
-  final Function(String) onItemDecrement;
-  final Function(String) onItemRemove;
-
-  const SelectedItemsList({
-    super.key,
-    required this.itemCounts,
-    required this.onItemIncrement,
-    required this.onItemDecrement,
-    required this.onItemRemove,
-  });
-
-  @override
-  SelectedItemsListState createState() => SelectedItemsListState();
-}
-
-class SelectedItemsListState extends State<SelectedItemsList> {
-  late ScrollController _scrollController;
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController = ScrollController();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 1,
-      child: SizedBox(
-        width: double.infinity,
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: Column(
-                children: widget.itemCounts.entries
-                    .where((entry) => entry.value >= 1)
-                    .map((entry) {
-                  return ListTile(
-                    title: Text(entry.key),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          onPressed: () => widget.onItemDecrement(entry.key),
-                          icon: const Icon(
-                            Icons.delete,
-                            color: red,
-                          ),
-                        ),
-                        Text(entry.value.toString()),
-                        IconButton(
-                          onPressed: () => widget.onItemIncrement(entry.key),
-                          icon: const Icon(
-                            Icons.add,
-                            color: green,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
   }
 }

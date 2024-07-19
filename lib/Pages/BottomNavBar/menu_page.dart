@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:juice_point/Components/custom_text.dart';
 import 'package:juice_point/utils/constants.dart';
 
 class MenuPage extends StatefulWidget {
@@ -25,15 +26,12 @@ class _MenuPageState extends State<MenuPage> {
           children: [
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text(
-                "~ Menu ~",
-                style: TextStyle(
-                  color: black,
-                  fontSize: 26,
-                  fontFamily: 'Roboto Slab',
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 1.81,
-                ),
+              child: CustomText(
+                value: "~ Menu ~",
+                size: 26,
+                fontFamily: 'Roboto Slab',
+                fontWeight: FontWeight.w700,
+                letterSpacing: 1.81,
               ),
             ),
             Expanded(

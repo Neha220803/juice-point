@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:juice_point/Components/new_order/menu_item_card.dart';
+import 'package:juice_point/Components/new_order_page_components/menu_item_card.dart';
 
 class MenuCategoryExpansionTile extends StatelessWidget {
   final BuildContext context;

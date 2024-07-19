@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:juice_point/Components/custom_font_text.dart';
 import 'package:juice_point/Pages/BottomNavBar/history_page.dart';
 import 'package:juice_point/Pages/BottomNavBar/home_page.dart';
 import 'package:juice_point/Pages/BottomNavBar/menu_page.dart';
@@ -38,12 +38,10 @@ class _HomeNavPageState extends State<HomeNavPage> {
     return Scaffold(
       drawer: SideNavBar(),
       appBar: AppBar(
-        title: Text(
-          "Juice Point",
-          style: GoogleFonts.pacifico(
-            color: white,
-            textStyle: TextStyle(fontSize: 20),
-          ),
+        title: CustomFontText(
+          value: "Juice Point",
+          color: white,
+          size: 20,
         ),
         backgroundColor: primaryColor,
         iconTheme: IconThemeData(color: white),

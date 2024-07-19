@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:juice_point/Components/custom_text.dart';
 import 'package:juice_point/Pages/login_page.dart';
 import 'package:juice_point/utils/constants.dart';
 import 'package:juice_point/utils/responsive.dart';
@@ -33,15 +34,13 @@ class _SideNavBarState extends State<SideNavBar> {
                       radius: 40,
                       backgroundImage: AssetImage("assets/logo.png"),
                     ),
-                    Text(
-                      "Juice Point",
-                      style: TextStyle(
-                        fontSize: !responsive.isMobile(context)
-                            ? 25
-                            : MediaQuery.of(context).size.width / 17,
-                        fontWeight: FontWeight.w500,
-                        color: white,
-                      ),
+                    CustomText(
+                      value: "Juice Point",
+                      size: !responsive.isMobile(context)
+                          ? 25
+                          : MediaQuery.of(context).size.width / 17,
+                      fontWeight: FontWeight.w500,
+                      color: white,
                     ),
                   ],
                 ),
@@ -50,7 +49,7 @@ class _SideNavBarState extends State<SideNavBar> {
           ),
           ListTile(
             leading: Icon(Icons.home),
-            title: Text('Home'),
+            title: CustomText(value: 'Home'),
             onTap: () {
               Navigator.pop(context);
             },
@@ -58,7 +57,7 @@ class _SideNavBarState extends State<SideNavBar> {
           Divider(),
           ListTile(
             leading: Icon(Icons.notifications),
-            title: Text('Stock Requests'),
+            title: CustomText(value: 'Stock Requests'),
             onTap: () {
               // print(MediaQuery.of(context).size.width);
               // Navigator.push(
@@ -70,9 +69,8 @@ class _SideNavBarState extends State<SideNavBar> {
           //  Divider(),
           ListTile(
             leading: Icon(Icons.arrow_back),
-            title: Text("Log Out"),
+            title: CustomText(value: "Log Out"),
             onTap: () async {
-              // await GoogleSignIn().signOut();
               FirebaseAuth.instance.signOut();
               Navigator.of(context).popUntil((route) => route.isFirst);
               Navigator.pushReplacement(
