@@ -1,3 +1,3 @@
-# juice_point
+# Juice Point
 
-A new Flutter project.
+A Flutter project.
