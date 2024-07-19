@@ -2,7 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:juice_point/Components/custom_text.dart';
+import 'package:juice_point/Widgets/custom_text.dart';
 import 'package:juice_point/utils/constants.dart';
 
 class MenuPage extends StatefulWidget {

@@ -29,3 +29,14 @@ Future<void> incOrderNo() async {
   curNum++;
   // print("Current order number: $curNum");
 }
+
+Future<int> calculateItemCost(String itemName) async {
+  QuerySnapshot querySnapshot =
+      await _menu.where('name', isEqualTo: itemName).limit(1).get();
+  if (querySnapshot.docs.isNotEmpty) {
+    var data = querySnapshot.docs.first.data() as Map<String, dynamic>;
+    var cost = data['cost'];
+    return (cost is int) ? cost : (cost as double).toInt();
+  }
+  return 0;
+}

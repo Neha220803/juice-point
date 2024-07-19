@@ -2,10 +2,11 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:juice_point/Components/custom_text.dart';
+import 'package:juice_point/Widgets/custom_text.dart';
 import 'package:juice_point/Components/new_order_page_components/bill_pop_up.dart';
 import 'package:juice_point/Components/new_order_page_components/menu_category_tile.dart';
 import 'package:juice_point/Components/new_order_page_components/select_items_list.dart';
+import 'package:juice_point/Widgets/custome_button.dart';
 import 'package:juice_point/utils/constants.dart';
 
 class NewOrderPage extends StatefulWidget {
@@ -54,16 +55,12 @@ class _NewOrderPageState extends State<NewOrderPage> {
                         letterSpacing: 1.81,
                       ),
                       const SizedBox(),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(13),
-                          ),
-                          backgroundColor: secondaryColor,
-                          foregroundColor: black,
-                          fixedSize: const Size(120, 50),
-                        ),
-                        onPressed: () {
+                      CustomButton(
+                        text: "View Bill",
+                        color: secondaryColor,
+           
+                        fixedSize: const Size(120, 50),
+                        callback: () {
                           if (itemCounts.isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
@@ -83,7 +80,6 @@ class _NewOrderPageState extends State<NewOrderPage> {
                             );
                           }
                         },
-                        child: const CustomText(value: "View Bill"),
                       ),
                     ],
                   ),

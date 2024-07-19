@@ -2,7 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:juice_point/Components/custom_text.dart';
+import 'package:juice_point/Widgets/custom_text.dart';
 import 'package:juice_point/Pages/login_page.dart';
 import 'package:juice_point/utils/constants.dart';
 import 'package:juice_point/utils/responsive.dart';

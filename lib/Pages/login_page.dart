@@ -1,10 +1,12 @@
 // ignore_for_file:  avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:juice_point/Components/custom_font_text.dart';
+import 'package:juice_point/Widgets/custom_font_text.dart';
 import 'package:juice_point/Functions/signin_emai_password.dart';
 import 'package:juice_point/Models/user_model.dart';
 import 'package:juice_point/Pages/home_nav_page.dart';
+import 'package:juice_point/Widgets/custom_text_field.dart';
+import 'package:juice_point/Widgets/custome_button.dart';
 import 'package:juice_point/utils/constants.dart';
 import 'package:juice_point/utils/responsive.dart';
 
@@ -54,60 +56,31 @@ class _LoginPageState extends State<LoginPage> {
                             width: !responsive.isMobile(context)
                                 ? 400
                                 : double.infinity,
-                            child: TextFormField(
-                              controller: _emailController,
-                              decoration: InputDecoration(
+                            child: CustomTextField(
                                 labelText: 'Enter Email ID',
-                                border: const OutlineInputBorder(),
-                                filled: true,
-                                fillColor: white.withOpacity(0.5),
-                              ),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your email';
-                                }
-                                return null;
-                              },
-                            ),
+                                errorText: 'Please Enter your email',
+                                controller: _emailController),
                           ),
                           const SizedBox(height: 20),
                           SizedBox(
-                            width: !responsive.isMobile(context)
-                                ? 400
-                                : double.infinity,
-                            child: TextFormField(
-                              controller: _passwordController,
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                labelText: 'Enter Password',
-                                border: const OutlineInputBorder(),
-                                filled: true,
-                                fillColor: white.withOpacity(0.5),
-                              ),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your password';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
+                              width: !responsive.isMobile(context)
+                                  ? 400
+                                  : double.infinity,
+                              child: CustomTextField(
+                                  labelText: "Enter Password",
+                                  errorText: "Please enter your Password",
+                                  controller: _passwordController)),
                           const SizedBox(height: 20),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              backgroundColor: white.withOpacity(0.7),
-                              foregroundColor: black,
-                              fixedSize: Size(
-                                  (!responsive.isMobile(context)
-                                          ? 400
-                                          : MediaQuery.of(context).size.width) -
-                                      100,
-                                  45),
-                            ),
-                            onPressed: () async {
+                          CustomButton(
+                            text: "Login",
+                            color: white.withOpacity(0.7),
+                            fixedSize: Size(
+                                (!responsive.isMobile(context)
+                                        ? 400
+                                        : MediaQuery.of(context).size.width) -
+                                    100,
+                                55),
+                            callback: () async {
                               // Validate the form before proceeding
                               if (_formKey.currentState!.validate()) {
                                 showDialog(
@@ -144,7 +117,6 @@ class _LoginPageState extends State<LoginPage> {
                                 }
                               }
                             },
-                            child: const Text('Login'),
                           ),
                         ],
                       ),

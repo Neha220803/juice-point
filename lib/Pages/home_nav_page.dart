@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:juice_point/Components/custom_font_text.dart';
+import 'package:juice_point/Widgets/custom_font_text.dart';
 import 'package:juice_point/Pages/BottomNavBar/history_page.dart';
 import 'package:juice_point/Pages/BottomNavBar/home_page.dart';
 import 'package:juice_point/Pages/BottomNavBar/menu_page.dart';

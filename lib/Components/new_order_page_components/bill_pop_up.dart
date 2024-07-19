@@ -2,9 +2,9 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:juice_point/Components/custom_text.dart';
+import 'package:juice_point/Widgets/custom_text.dart';
 import 'package:juice_point/Functions/calculate_bill.dart';
-import 'package:juice_point/Functions/calculate_item_cost.dart';
+import 'package:juice_point/Widgets/custome_button.dart';
 import 'package:juice_point/utils/constants.dart';
 
 class BillPopUp extends StatefulWidget {
@@ -152,16 +152,12 @@ class _BillPopUpState extends State<BillPopUp> {
               ),
             ),
             const SizedBox(height: 10),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(13),
-                ),
-                backgroundColor: secondaryColor,
-                foregroundColor: black,
-                fixedSize: const Size(340, 50),
-              ),
-              onPressed: _selectedItem2 == null || _isLoading
+            CustomButton(
+              text: "Submit",
+              color: secondaryColor,
+              
+              fixedSize: const Size(340, 50),
+              callback: _selectedItem2 == null || _isLoading
                   ? null
                   : () async {
                       setState(() {
@@ -195,18 +191,18 @@ class _BillPopUpState extends State<BillPopUp> {
                       }
                       print("Order submitted successfully.");
                     },
-              child: _isLoading
-                  ? const CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(black),
-                    )
-                  : const CustomText(
-                      value: 'Submit',
-                      color: black,
-                      size: 20,
-                      fontFamily: 'Open Sans',
-                      fontWeight: FontWeight.w600,
-                    ),
-            ),
+              // child: _isLoading
+              //     ? const CircularProgressIndicator(
+              //         valueColor: AlwaysStoppedAnimation<Color>(black),
+              //       )
+              //     : const CustomText(
+              //         value: 'Submit',
+              //         color: black,
+              //         size: 20,
+              //         fontFamily: 'Open Sans',
+              //         fontWeight: FontWeight.w600,
+              //       ),
+            )
           ],
         ),
       ),

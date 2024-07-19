@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:juice_point/Components/custom_font_text.dart';
-import 'package:juice_point/Components/custom_text.dart';
+import 'package:juice_point/Widgets/custom_font_text.dart';
+import 'package:juice_point/Widgets/custom_text.dart';
 import 'package:juice_point/utils/constants.dart';
 import 'package:juice_point/utils/responsive.dart';
 
