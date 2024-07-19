@@ -20,11 +20,19 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primarySwatch: green),
+      theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: green,
+          ),
+          dialogTheme: DialogTheme(
+            backgroundColor: Colors.white,
+          ),
+          scaffoldBackgroundColor: white,
+          primarySwatch: green),
+
       debugShowCheckedModeBanner: false,
       home: LoginPage(),
-      // routes: 
-      
+      // routes:
     );
   }
 }

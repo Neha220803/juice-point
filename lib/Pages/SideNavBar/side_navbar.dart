@@ -36,7 +36,7 @@ class _SideNavBarState extends State<SideNavBar> {
                     ),
                     CustomText(
                       value: "Juice Point",
-                      size: !responsive.isMobile(context)
+                      size: !Responsive.isMobile(context)
                           ? 25
                           : MediaQuery.of(context).size.width / 17,
                       fontWeight: FontWeight.w500,

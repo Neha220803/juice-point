@@ -59,6 +59,8 @@ class OrderDetailsDialogState extends State<OrderDetailsDialog> {
               Map<String, dynamic> data = snapshot.data!.data()!;
               return SingleChildScrollView(
                 child: DataTable(
+                  headingRowColor: WidgetStateProperty.all(secondaryColor),
+                  border: TableBorder.all(color: black),
                   columns: const [
                     DataColumn(label: CustomText(value: 'Detail')),
                     DataColumn(label: CustomText(value: 'Value')),

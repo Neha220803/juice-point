@@ -58,51 +58,55 @@ class _BillPopUpState extends State<BillPopUp> {
             const Divider(
               color: primaryColor,
             ),
-            DataTable(
-              columns: const [
-                DataColumn(
-                  label: CustomText(value: "Item"),
-                ),
-                DataColumn(
-                    label: CustomText(
-                  value: "No.",
-                )),
-                DataColumn(label: CustomText(value: "Cost")),
-              ],
-              rows: widget.itemCounts.entries.map((entry) {
-                return DataRow(
-                  cells: [
-                    DataCell(
-                      SizedBox(
-                        // color: Colors.amber,
-                        width: 80,
-                        child: Text(
-                          entry.key,
-                          textAlign: TextAlign.center,
-                          maxLines: null, // Allow multiple lines
+            Center(
+              child: DataTable(
+                headingRowColor: WidgetStateProperty.all(secondaryColor),
+                border: TableBorder.all(color: black),
+                columns: const [
+                  DataColumn(
+                    label: CustomText(value: "Item"),
+                  ),
+                  DataColumn(
+                      label: CustomText(
+                    value: "No.",
+                  )),
+                  DataColumn(label: CustomText(value: "Cost")),
+                ],
+                rows: widget.itemCounts.entries.map((entry) {
+                  return DataRow(
+                    cells: [
+                      DataCell(
+                        SizedBox(
+                          // color: Colors.amber,
+                          width: 80,
+                          child: Text(
+                            entry.key,
+                            textAlign: TextAlign.center,
+                            maxLines: null, // Allow multiple lines
+                          ),
                         ),
                       ),
-                    ),
-                    DataCell(Text(entry.value.toString())),
-                    DataCell(FutureBuilder<int>(
-                      future: calculateItemCost(entry.key),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const CircularProgressIndicator();
-                        } else if (snapshot.hasError) {
-                          return const Text("Error");
-                        } else {
-                          return CustomText(
-                              textAlign: TextAlign.center,
-                              value:
-                                  '₹ ${widget.itemCounts[entry.key]! * snapshot.data!.toInt()}\n(${entry.value.toString()}×${snapshot.data.toString()})');
-                        }
-                      },
-                    )),
-                  ],
-                );
-              }).toList(),
+                      DataCell(Text(entry.value.toString())),
+                      DataCell(FutureBuilder<int>(
+                        future: calculateItemCost(entry.key),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const CircularProgressIndicator();
+                          } else if (snapshot.hasError) {
+                            return const Text("Error");
+                          } else {
+                            return CustomText(
+                                textAlign: TextAlign.center,
+                                value:
+                                    '₹ ${widget.itemCounts[entry.key]! * snapshot.data!.toInt()}\n(${entry.value.toString()}×${snapshot.data.toString()})');
+                          }
+                        },
+                      )),
+                    ],
+                  );
+                }).toList(),
+              ),
             ),
             const Divider(),
             Container(
@@ -155,7 +159,7 @@ class _BillPopUpState extends State<BillPopUp> {
             CustomButton(
               text: "Submit",
               color: secondaryColor,
-              
+
               fixedSize: const Size(340, 50),
               callback: _selectedItem2 == null || _isLoading
                   ? null

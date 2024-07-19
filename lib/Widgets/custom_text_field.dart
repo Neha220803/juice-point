@@ -19,7 +19,7 @@ class CustomTextField extends StatelessWidget {
       obscureText: true,
       decoration: InputDecoration(
         labelText: labelText,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(13)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         filled: true,
         fillColor: white.withOpacity(0.5),
       ),

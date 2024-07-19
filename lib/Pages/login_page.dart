@@ -1,5 +1,3 @@
-// ignore_for_file:  avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:juice_point/Widgets/custom_font_text.dart';
 import 'package:juice_point/Functions/signin_emai_password.dart';
@@ -46,14 +44,14 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Column(
                         children: [
-                          if (!responsive.isMobile(context))
+                          if (!Responsive.isMobile(context))
                             const CustomFontText(
                                 value: "Juice Point",
                                 color: Color.fromARGB(255, 221, 221, 221),
                                 size: 70,
                                 fontWeight: FontWeight.w400),
                           SizedBox(
-                            width: !responsive.isMobile(context)
+                            width: !Responsive.isMobile(context)
                                 ? 400
                                 : double.infinity,
                             child: CustomTextField(
@@ -63,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const SizedBox(height: 20),
                           SizedBox(
-                              width: !responsive.isMobile(context)
+                              width: !Responsive.isMobile(context)
                                   ? 400
                                   : double.infinity,
                               child: CustomTextField(
@@ -75,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                             text: "Login",
                             color: white.withOpacity(0.7),
                             fixedSize: Size(
-                                (!responsive.isMobile(context)
+                                (!Responsive.isMobile(context)
                                         ? 400
                                         : MediaQuery.of(context).size.width) -
                                     100,

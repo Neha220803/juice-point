@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
-class responsive extends StatelessWidget {
+
+class Responsive extends StatelessWidget {
   final Widget mobile;
   final Widget? tablet;
   final Widget desktop;
 
-  const responsive(
+  const Responsive(
       {super.key, required this.mobile, this.tablet, required this.desktop});
 
   static bool isMobile(BuildContext context) =>

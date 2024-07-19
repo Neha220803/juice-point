@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                   value: "Pouring Happiness, one glass at a time",
                   textAlign: TextAlign.center,
                   color: secondaryColor,
-                  size: !responsive.isMobile(context)
+                  size: !Responsive.isMobile(context)
                       ? 32
                       : MediaQuery.of(context).size.width / 22,
                   fontFamily: 'Roboto',
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                 ),
 
                 // Conditionally render text based on device type
-                if (responsive.isMobile(context))
+                if (Responsive.isMobile(context))
                   SizedBox(
                     width: 217.83,
                     height: 141,
@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                if (!responsive.isMobile(context))
+                if (!Responsive.isMobile(context))
                   const CustomFontText(
                     value: "Juice Point",
                     size: 80,
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                     value:
                         "Welcome to Juice Point, a happy place where refreshing flavors and healthy vibes come together! Enjoy our vibrant, delicious juices made with love and the freshest ingredients.",
                     textAlign: TextAlign.center,
-                    size: !responsive.isMobile(context)
+                    size: !Responsive.isMobile(context)
                         ? 30
                         : MediaQuery.of(context).size.width / 23.5,
                     color: secondaryColor,
