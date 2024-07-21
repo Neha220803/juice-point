@@ -1,3 +1,5 @@
 # Juice Point
 
-A Flutter project.
+A Freelance Flutter Project for a juice shot to maintain order records 
+
+
