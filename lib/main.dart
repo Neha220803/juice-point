@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:juice_point/Pages/login_page.dart';
@@ -29,10 +28,14 @@ class MainApp extends StatelessWidget {
           ),
           scaffoldBackgroundColor: white,
           primarySwatch: green),
-
       debugShowCheckedModeBanner: false,
       home: LoginPage(),
-      // routes:
+      // initialRoute: "/",
+      // routes: {
+      //   '/': (context) => LoginPage(),
+      //   '/login': (context) => const LoginPage(),
+      //   '/logout': (context) => const HomeNavPage(),
+      // },
     );
   }
 }
